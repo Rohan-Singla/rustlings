@@ -1,6 +1,6 @@
 // TODO: Fix the function body without changing the signature.
 fn square(num: i32) -> i32 {
-    num * num;
+    return num as i32 * num as i32;
 }
 
 fn main() {

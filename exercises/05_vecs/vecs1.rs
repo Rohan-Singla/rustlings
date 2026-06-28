@@ -1,6 +1,8 @@
 fn elems_to_vec(a: i32, b: i32, c: i32) -> Vec<i32> {
     // TODO: Return a vector containing the elements a, b and c (in this order).
     // Use the "vec!" macro.
+
+    return vec![a,b,c];
 }
 
 fn main() {
