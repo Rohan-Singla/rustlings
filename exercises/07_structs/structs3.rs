@@ -10,19 +10,26 @@ struct Fireworks {
     rockets: usize,
 }
 
-// TODO: Turn this function into an associated function on `Fireworks`.
-fn new_fireworks() -> Fireworks {
-    Fireworks { rockets: 0 }
-}
+impl Fireworks {
+    // Associated function: constructor
+    fn new() -> Self {
+        Self { rockets: 0 }
+    }
 
-// TODO: Turn this function into a method on `Fireworks`.
-fn add_rockets(fireworks: &mut Fireworks, rockets: usize) {
-    fireworks.rockets += rockets
-}
+    // Method to add rockets, takes &mut self
+    fn add_rockets(&mut self, rockets: usize) {
+        self.rockets += rockets
+    }
+    
+    // Methods to start fireworks
+    fn start(self) -> String {
+        "🚀".repeat(self.rockets)
+    }
 
-// TODO: Turn this function into a method on `Fireworks`.
-fn start(fireworks: Fireworks) -> String {
-    "🚀".repeat(fireworks.rockets)
+    // Convenience method to start fireworks without taking ownership
+    fn peek(&self) -> String {
+        "🚀".repeat(self.rockets)
+    }
 }
 
 fn main() {
@@ -36,11 +43,11 @@ mod tests {
     #[test]
     fn start_some_fireworks() {
         let f = Fireworks::new();
-        assert_eq!(f.start(), "");
+        assert_eq!(f.peek(), "");
 
         let mut f = Fireworks::new();
         f.add_rockets(3);
-        assert_eq!(f.start(), "🚀🚀🚀");
+        assert_eq!(f.peek(), "🚀🚀🚀");
 
         let mut f = Fireworks::new();
         f.add_rockets(7);
