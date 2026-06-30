@@ -13,9 +13,10 @@ fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     Ok(qty * cost_per_item + processing_fee)
 }
 
-// TODO: Fix the compiler error by changing the signature and body of the
-// `main` function.
-fn main() {
+// The main problem is that we must return a Result in main,
+// and also provide an error that implements `std::error::Error`.
+// Use `Box<dyn std::error::Error>` for the error case.
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut tokens = 100;
     let pretend_user_input = "8";
 
@@ -24,8 +25,10 @@ fn main() {
 
     if cost > tokens {
         println!("You can't afford that many!");
+        return Err("You can't afford that many!".into());
     } else {
         tokens -= cost;
         println!("You now have {tokens} tokens.");
     }
+    Ok(())
 }

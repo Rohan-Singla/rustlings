@@ -46,9 +46,16 @@ impl PositiveNonzeroInteger {
     }
 }
 
-// TODO: Add the correct return type `Result<(), Box<dyn ???>>`. What can we
-// use to describe both errors? Is there a trait which both errors implement?
-fn main() {
+// Corrected: Add the correct return type `Result<(), Box<dyn Error>>`.
+// Use the `?` operator for both errors by using `Box<dyn Error>`
+// and implementing From for CreationError.
+// impl From<CreationError> for Box<dyn Error> {
+//     fn from(err: CreationError) -> Self {
+//         Box::new(err)
+//     }
+// }
+
+fn main() -> Result<(), Box<dyn Error>> {
     let pretend_user_input = "42";
     let x: i64 = pretend_user_input.parse()?;
     println!("output={:?}", PositiveNonzeroInteger::new(x)?);
